@@ -33,9 +33,6 @@ public class User implements UserDetails {
     @Column(unique = true, updatable = false)
     private String username;
 
-    @Column(unique = true)
-    private String email;
-
     @Column(length = 3000)
     private String password;
 

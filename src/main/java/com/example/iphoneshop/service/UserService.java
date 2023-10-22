@@ -21,14 +21,13 @@ public class UserService {
     private UserRepository userRepository;
 
     public User createUser(RegisterRequest registerRequest) {
-        User user = new User();
-        user.setEmail(user.getEmail());
-        user.setFirstname(registerRequest.getFirstname());
-        user.setLastname(registerRequest.getLastname());
-        user.setUsername(registerRequest.getUsername());
-        user.setPassword(bCryptPasswordEncoder.encode(registerRequest.getPassword()));
-        user.setRole(Role.CLIENT);
-
+        User user = User.builder()
+                .firstname(registerRequest.getFirstname())
+                .lastname(registerRequest.getLastname())
+                .username(registerRequest.getUsername())
+                .password(bCryptPasswordEncoder.encode(registerRequest.getPassword()))
+                .role(Role.CLIENT)
+                .build();
         try {
             log.info("Saving user {}", registerRequest.getEmail());
             return userRepository.save(user);
