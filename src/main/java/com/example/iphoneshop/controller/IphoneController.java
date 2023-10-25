@@ -13,7 +13,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +31,7 @@ public class IphoneController {
 
     @PostMapping("/manager/create")
     public ResponseEntity<Object> createIphone(@Valid @RequestBody IphoneDTO iphoneDTO,
-                                             BindingResult bindingResult) {
+                                               BindingResult bindingResult) {
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) return errors;
 
@@ -40,6 +39,13 @@ public class IphoneController {
         IphoneDTO createdIphone = iphoneMapper.iphoneToIphoneDto(iphone);
 
         return new ResponseEntity<>(createdIphone, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{iphoneId}")
+    public ResponseEntity<IphoneDTO> getIphone(@PathVariable String iphoneId) {
+        Iphone iphone = iphoneService.getIphoneById(Long.parseLong(iphoneId));
+        IphoneDTO iphoneDTO = iphoneMapper.iphoneToIphoneDto(iphone);
+        return ResponseEntity.ok(iphoneDTO);
     }
 
     @GetMapping("/all")

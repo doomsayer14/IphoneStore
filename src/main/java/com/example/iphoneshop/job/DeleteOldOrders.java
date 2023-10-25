@@ -11,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -29,6 +30,9 @@ public class DeleteOldOrders {
             }
         }
         if (!CollectionUtils.isEmpty(oldOrderList)) {
+            log.info("Deleting orders: {}", oldOrderList.stream()
+                    .map(Order::getId)
+                    .collect(Collectors.toList()));
             orderService.deleteOrders(oldOrderList);
         }
     }

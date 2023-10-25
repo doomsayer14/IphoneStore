@@ -1,18 +1,15 @@
 package com.example.iphoneshop.service;
 
 import com.example.iphoneshop.entity.User;
-import com.example.iphoneshop.entity.enums.Role;
 import com.example.iphoneshop.payload.request.LoginRequest;
 import com.example.iphoneshop.payload.request.RegisterRequest;
 import com.example.iphoneshop.payload.response.MessageResponse;
-import com.example.iphoneshop.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service

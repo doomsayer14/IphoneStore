@@ -2,15 +2,11 @@ package com.example.iphoneshop.controller;
 
 import com.example.iphoneshop.payload.request.LoginRequest;
 import com.example.iphoneshop.payload.request.RegisterRequest;
-import com.example.iphoneshop.payload.response.MessageResponse;
 import com.example.iphoneshop.service.AuthService;
 import com.example.iphoneshop.validation.ResponseErrorValidation;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +27,7 @@ public class AuthController {
 
     @PostMapping({"/register", "/sign-up"})
     public ResponseEntity<Object> register(@RequestBody RegisterRequest registerRequest,
-                                                    BindingResult bindingResult) {
+                                           BindingResult bindingResult) {
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) {
             return errors;
@@ -41,7 +37,7 @@ public class AuthController {
 
     @PostMapping({"/login", "sign-in"})
     public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest,
-                                                 BindingResult bindingResult) {
+                                        BindingResult bindingResult) {
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) {
             return errors;
